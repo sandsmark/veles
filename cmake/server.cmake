@@ -65,7 +65,7 @@ if(WIN32)
   )
 endif()
 
-if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
+if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE AND NOT VENV_DIR)
   set(BASEPYEXE python3)
   set(SERVER_DIR_DESTINATION share)
   # create venv with dependencies after installation and remove it when removing package
@@ -98,6 +98,8 @@ if(CMAKE_HOST_UNIX AND NOT CMAKE_HOST_APPLE)
       DEPENDS ${SERVER_OUTPUT_STARTUP_SCRIPT_FILE}
       DEPENDS ${SERVER_OUTPUT_VELES_LIB_FILE}
   )
+elseif(VENV_DIR)
+  set(SERVER_DIR_DESTINATION share)
 endif()
 
 if(CMAKE_HOST_APPLE)
